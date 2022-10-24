@@ -1,11 +1,18 @@
+import CharacterDetailPage from "@/pages/CharacterDetailPage";
+import CharactersPage from "@/pages/CharactersPage";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
-function App() {
+export default function App() {
 	return (
 		<div className="app">
-			<h1>Hello iyiMakina!</h1>
+			<Routes>
+				<Route path="/" element={<CharactersPage />} />
+				<Route
+					path="/characters/:characterId"
+					element={<CharacterDetailPage />}
+				/>
+			</Routes>
 		</div>
 	);
 }
-
-export default App;
