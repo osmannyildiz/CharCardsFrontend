@@ -1,0 +1,58 @@
+.debug-screen {
+	font-family: monospace;
+	opacity: 0.8;
+}
+
+.debug-screen--hidden .debug-screen__screen {
+	display: none;
+}
+
+.debug-screen--hidden .debug-screen__show-btn {
+	display: block;
+}
+
+.debug-screen__screen {
+	width: 350px;
+	height: 200px;
+	padding: 1rem 1.5rem 0.5rem 1.5rem;
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	bottom: 2rem;
+	right: 2rem;
+	color: #0f0;
+	background-color: #000;
+	border-radius: 1rem;
+	font-size: 0.9rem;
+}
+
+.debug-screen__header {
+	display: flex;
+	justify-content: space-between;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+}
+
+.debug-screen__hide-btn {
+	cursor: pointer;
+}
+
+.debug-screen__content {
+	flex-grow: 1;
+	font-size: 0.8rem;
+	overflow-y: auto;
+}
+
+.debug-screen__show-btn {
+	display: none;
+	padding: 0.5rem;
+	position: fixed;
+	bottom: 2rem;
+	right: 2rem;
+	color: #0f0;
+	background-color: #000;
+	border-radius: 1rem;
+	font-size: 0.7rem;
+	font-weight: bold;
+	cursor: pointer;
+}
