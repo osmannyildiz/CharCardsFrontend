@@ -1,6 +1,6 @@
 import Footer from "@/components/ui/Footer";
 import Header from "@/components/ui/Header";
-import { Children } from "@/utils/types";
+import type { Children } from "@/utils/types";
 // import "./MainLayout.css";
 
 interface Props {

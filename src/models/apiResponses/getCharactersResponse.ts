@@ -1,5 +1,5 @@
-import Character from "@/models/character";
-import { Url } from "@/utils/types";
+import type Character from "@/models/character";
+import type { Url } from "@/utils/types";
 
 export default interface GetCharactersResponse {
 	info: {

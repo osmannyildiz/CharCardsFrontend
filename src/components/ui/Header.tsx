@@ -1,4 +1,4 @@
-import { Children } from "@/utils/types";
+import type { Children } from "@/utils/types";
 // import "./Header.css";
 
 interface Props {

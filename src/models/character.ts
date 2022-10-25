@@ -1,4 +1,4 @@
-import { Url } from "@/utils/types";
+import type { Url } from "@/utils/types";
 
 export default interface Character {
 	id: number;

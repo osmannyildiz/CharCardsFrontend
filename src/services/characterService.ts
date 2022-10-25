@@ -1,5 +1,5 @@
 import GetCharactersResponse from "@/models/apiResponses/getCharactersResponse";
-import Character from "@/models/character";
+import type Character from "@/models/character";
 import HttpClient from "@/utils/httpClient";
 
 export default class CharacterService {

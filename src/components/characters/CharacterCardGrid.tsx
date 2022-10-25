@@ -1,5 +1,5 @@
 import CharacterCard from "@/components/characters/CharacterCard";
-import Character from "@/models/character";
+import type Character from "@/models/character";
 // import "./CharacterCardGrid.css";
 
 interface Props {
