@@ -1,35 +1,35 @@
 import CharacterCardGrid from "@/components/characters/CharacterCardGrid";
 import MainLayout from "@/components/layout/MainLayout";
 import SearchBox from "@/components/ui/SearchBox";
-import Character from "@/models/character";
-import CharacterService from "@/services/characterService";
-import { useEffect, useState } from "react";
+import { fetchCharactersNextPage } from "@/data/apiSlice";
+import type { StoreDispatch, StoreState } from "@/data/store";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 // import "./CharactersPage.css";
 
 export default function CharactersPage() {
-	const [characters, setCharacters] = useState<Character[]>([]);
-	const [lastLoadedPage, setLastLoadedPage] = useState(0);
+	const characters = useSelector(
+		(state: StoreState) => state.apiSlice.characters.paginated.data
+	);
+	const lastFetchedPage = useSelector(
+		(state: StoreState) => state.apiSlice.characters.paginated.lastFetchedPage
+	);
+	const dispatch = useDispatch<StoreDispatch>();
 
 	const loadMore = async () => {
-		const newResults = await CharacterService.getAll(lastLoadedPage + 1);
-		setCharacters((characters) => [...characters, ...newResults]);
-		setLastLoadedPage((lastLoadedPage) => lastLoadedPage + 1);
+		await dispatch(fetchCharactersNextPage());
 	};
 
-	let ignore = false;
 	useEffect(() => {
-		if (!ignore) {
+		if (lastFetchedPage === 0) {
 			loadMore();
 		}
-		return () => {
-			ignore = true;
-		};
 	}, []);
 
 	return (
 		<MainLayout mainClassName="characters-page" headerChildren={<SearchBox />}>
 			<CharacterCardGrid characters={characters} />
-			<button type="button" onClick={() => loadMore()}>
+			<button type="button" onClick={loadMore}>
 				Load More
 			</button>
 		</MainLayout>
