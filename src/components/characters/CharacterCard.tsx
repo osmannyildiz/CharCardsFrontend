@@ -1,4 +1,5 @@
 import type Character from "@/models/character";
+import { Link } from "react-router-dom";
 import "./CharacterCard.css";
 
 interface Props {
@@ -7,10 +8,10 @@ interface Props {
 
 export default function CharacterCard({ character }: Props) {
 	return (
-		<div className="character-card">
+		<Link className="character-card" to={`/characters/${character.id}`}>
 			<span>
 				({character.id}) {character.name}
 			</span>
-		</div>
+		</Link>
 	);
 }

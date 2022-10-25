@@ -9,7 +9,7 @@ export default function CharacterDetailPage() {
 	return (
 		<MainLayout
 			mainClassName="character-detail-page"
-			headerChildren={<a href="#">Back to characters</a>}
+			headerChildren={<Link to="/">Back to characters</Link>}
 		>
 			<CharacterDetail character={character!} />
 		</MainLayout>
