@@ -1,3 +1,4 @@
+import GetCharacterResponse from "@/models/apiResponses/getCharacterResponse";
 import GetCharactersResponse from "@/models/apiResponses/getCharactersResponse";
 import type Character from "@/models/character";
 import HttpClient from "@/utils/httpClient";
@@ -10,5 +11,12 @@ export default class CharacterService {
 			`${this._endpoint}?page=${page}`
 		);
 		return resp.results;
+	}
+
+	static async getById(characterId: number): Promise<Character> {
+		const resp = await HttpClient.get<GetCharacterResponse>(
+			`${this._endpoint}/${characterId}`
+		);
+		return resp;
 	}
 }
