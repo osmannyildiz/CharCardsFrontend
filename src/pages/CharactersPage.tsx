@@ -1,9 +1,11 @@
 import CharacterCardGrid from "@/components/characters/CharacterCardGrid";
 import MainLayout from "@/components/layout/MainLayout";
+import MyIcon from "@/components/ui/MyIcon";
 import SearchBox from "@/components/ui/SearchBox";
 import { fetchCharactersNextPage } from "@/data/apiSlice";
 import type { StoreDispatch, StoreState } from "@/data/store";
 import { setCharactersSearchQuery } from "@/data/uiSlice";
+import { mdiLoading } from "@mdi/js";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./CharactersPage.css";
@@ -11,6 +13,9 @@ import "./CharactersPage.css";
 export default function CharactersPage() {
 	const characters = useSelector(
 		(state: StoreState) => state.apiSlice.characters.paginated.data
+	);
+	const isFetchingCharacters = useSelector(
+		(state: StoreState) => state.apiSlice.characters.paginated.isFetching
 	);
 	const lastFetchedPage = useSelector(
 		(state: StoreState) => state.apiSlice.characters.paginated.lastFetchedPage
@@ -60,7 +65,10 @@ export default function CharactersPage() {
 					type="button"
 					onClick={loadMore}
 				>
-					Load more
+					{isFetchingCharacters && (
+						<MyIcon className="btn-icon" path={mdiLoading} spin={true} />
+					)}
+					<span>Load more</span>
 				</button>
 			</div>
 		</MainLayout>

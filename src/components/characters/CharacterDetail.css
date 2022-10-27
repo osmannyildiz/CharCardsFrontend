@@ -11,7 +11,16 @@
 	border-radius: var(--border-radius);
 }
 
-.character-detail__ul {
+.character-detail__list {
 	padding-left: 0;
 	list-style: none;
+}
+
+.character-detail__list-item {
+	margin-bottom: 0.2rem;
+}
+
+.character-detail__list-item-key {
+	font-weight: bold;
+	margin-right: 0.2rem;
 }

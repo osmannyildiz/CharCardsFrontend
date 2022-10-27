@@ -1,5 +1,7 @@
 import DecorativeTitle from "@/components/ui/DecorativeTitle";
 import type Character from "@/models/character";
+import { mdiGenderFemale, mdiGenderMale } from "@mdi/js";
+import MyIcon from "../ui/MyIcon";
 import "./CharacterDetail.css";
 
 interface Props {
@@ -7,6 +9,24 @@ interface Props {
 }
 
 export default function CharacterDetail({ character }: Props) {
+	let genderIcon;
+	switch (character.gender) {
+		case "Female":
+			genderIcon = mdiGenderFemale;
+			break;
+		case "Male":
+			genderIcon = mdiGenderMale;
+			break;
+		case "Genderless":
+			genderIcon = null;
+			break;
+		case "unknown":
+			genderIcon = null;
+			break;
+		default:
+			throw new Error("Switch statement is not exhaustive.");
+	}
+
 	return (
 		<div className="character-detail">
 			<img
@@ -17,12 +37,18 @@ export default function CharacterDetail({ character }: Props) {
 			<DecorativeTitle className="character-detail__name">
 				{character.name}
 			</DecorativeTitle>
-			<ul className="character-detail__ul">
-				<li>
-					<b>Location:</b> {character.location.name}
+			<ul className="character-detail__list">
+				<li className="character-detail__list-item">
+					<span className="character-detail__list-item-key">Location:</span>
+					<span className="character-detail__list-item-value">
+						{character.location.name}
+					</span>
 				</li>
-				<li>
-					<b>Gender:</b> {character.gender}
+				<li className="character-detail__list-item">
+					<span className="character-detail__list-item-key">Gender:</span>
+					<span className="character-detail__list-item-value">
+						{genderIcon && <MyIcon path={genderIcon} />} {character.gender}
+					</span>
 				</li>
 			</ul>
 		</div>
