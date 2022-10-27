@@ -5,7 +5,7 @@ import { fetchCharactersNextPage } from "@/data/apiSlice";
 import type { StoreDispatch, StoreState } from "@/data/store";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import "./CharactersPage.css";
+import "./CharactersPage.css";
 
 export default function CharactersPage() {
 	const characters = useSelector(
@@ -27,11 +27,26 @@ export default function CharactersPage() {
 	}, []);
 
 	return (
-		<MainLayout mainClassName="characters-page" headerChildren={<SearchBox />}>
+		<MainLayout
+			mainClassName="characters-page"
+			headerChildren={
+				<SearchBox
+					className="characters-page__search-box"
+					placeholder="Search characters..."
+					align="center"
+				/>
+			}
+		>
 			<CharacterCardGrid characters={characters} />
-			<button type="button" onClick={loadMore}>
-				Load More
-			</button>
+			<div className="text-center">
+				<button
+					className="characters-page__load-more-btn btn btn--green"
+					type="button"
+					onClick={loadMore}
+				>
+					Load more
+				</button>
+			</div>
 		</MainLayout>
 	);
 }

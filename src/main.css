@@ -1,0 +1,77 @@
+:root {
+	--color-1: #590459;
+	--color-2: #1a1233;
+	--color-3: #146636;
+	--color-4: #204025;
+	--color-link: #24b35f;
+	--max-width: 1200px;
+	--border-radius: 1rem;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	margin: 0.5rem;
+	background-color: var(--color-2);
+	font-family: "Lato", sans-serif;
+}
+
+.container {
+	width: 100%;
+	max-width: var(--max-width);
+	margin: 0 auto;
+	/* position: relative; */
+}
+
+a {
+	color: var(--color-link);
+	text-decoration: none;
+}
+
+.btn {
+	padding: 0.5rem 1rem;
+	color: white;
+	border: none;
+	border-radius: var(--border-radius);
+	text-decoration: none;
+	cursor: pointer;
+}
+.btn--purple {
+	background-color: var(--color-1);
+}
+.btn--purple:hover {
+	background-color: var(--color-2);
+}
+.btn--green {
+	background-color: var(--color-3);
+}
+.btn--green:hover {
+	background-color: var(--color-4);
+}
+
+.input {
+	padding: 0.5rem 1rem;
+	background-color: white;
+	border: 4px dashed transparent;
+	border-radius: var(--border-radius);
+	font-size: 1rem;
+}
+.input:focus {
+	border-color: var(--color-3);
+	outline: none;
+}
+
+.d-none {
+	display: none !important;
+}
+
+.text-center {
+	text-align: center;
+}

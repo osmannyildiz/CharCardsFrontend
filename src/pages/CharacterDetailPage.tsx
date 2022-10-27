@@ -5,7 +5,7 @@ import { StoreDispatch, StoreState } from "@/data/store";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-// import "./CharacterDetailPage.css";
+import "./CharacterDetailPage.css";
 
 export default function CharacterDetailPage() {
 	const { characterId } = useParams();
@@ -28,7 +28,16 @@ export default function CharacterDetailPage() {
 	return (
 		<MainLayout
 			mainClassName="character-detail-page"
-			headerChildren={<Link to="/">Back to characters</Link>}
+			headerChildren={
+				<div className="text-center">
+					<Link
+						className="character-detail-page__return-btn btn btn--green"
+						to="/"
+					>
+						Back to characters
+					</Link>
+				</div>
+			}
 		>
 			{character ? (
 				<CharacterDetail character={character} />

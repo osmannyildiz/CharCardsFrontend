@@ -1,5 +1,5 @@
 import type { Children } from "@/utils/types";
-// import "./Header.css";
+import "./Header.css";
 
 interface Props {
 	children?: Children;
@@ -8,8 +8,10 @@ interface Props {
 export default function Header({ children }: Props) {
 	return (
 		<header className="header">
-			<h1>CharCards</h1>
-			{children}
+			<div className="container">
+				<img className="header__logo" src="/logo.png" alt="CharCards" />
+				{children}
+			</div>
 		</header>
 	);
 }

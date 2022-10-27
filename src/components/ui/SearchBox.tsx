@@ -1,12 +1,24 @@
-// import "./SearchBox.css";
+import cn from "@/utils/classNamesHelper";
+import "./SearchBox.css";
 
-export default function SearchBox() {
+interface Props {
+	placeholder: string;
+	align?: "start" | "center" | "end";
+	className?: string;
+}
+
+export default function SearchBox({
+	placeholder,
+	align,
+	className,
+}: Props) {
 	return (
-		<div className="search-box">
+		<div className={cn("search-box", className)}>
 			<input
-				className="search-box__input"
+				className="search-box__input input"
 				type="text"
-				placeholder="Search characters..."
+				placeholder={placeholder}
+				style={{ textAlign: align }}
 			/>
 		</div>
 	);

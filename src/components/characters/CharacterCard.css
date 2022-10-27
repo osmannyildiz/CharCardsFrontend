@@ -1,7 +1,47 @@
 .character-card {
-	display: inline-block;
-	padding: 2rem;
-	margin: 0.5rem;
-	background-color: #9f9;
-	border-radius: 1rem;
+	display: block;
+	width: 100%;
+	aspect-ratio: 1/1;
+	cursor: pointer;
+	object-fit: contain;
+	user-select: none;
+}
+
+.character-card__front {
+	width: 100%;
+	height: 100%;
+	border-radius: var(--border-radius);
+	overflow: clip;
+}
+
+.character-card__img {
+	display: block;
+	width: 100%;
+}
+
+.character-card__back {
+	width: 100%;
+	height: 100%;
+	padding: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	color: white;
+	background-color: var(--color-4);
+	background-image: linear-gradient(
+		-19deg,
+		var(--color-4) 0%,
+		var(--color-3) 100%
+	);
+	border-radius: var(--border-radius);
+}
+
+.character-card__name {
+	font-size: 1.2rem;
+}
+
+.character-card__details-btn {
+	font-size: 0.9rem;
 }

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import "./DebugScreen.css";
 
 export default function DebugScreen() {
-	const [isVisible, setIsVisible] = useState(true);
+	const [isVisible, setIsVisible] = useState(false);
 
 	const paginated_isFetching = useSelector(
 		(state: StoreState) => state.apiSlice.characters.paginated.isFetching
