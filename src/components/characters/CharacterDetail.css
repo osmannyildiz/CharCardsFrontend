@@ -1,0 +1,17 @@
+.character-detail {
+	color: white;
+	text-align: center;
+}
+
+.character-detail__img {
+	width: 100%;
+	max-width: 400px;
+	display: block;
+	margin: 0 auto;
+	border-radius: var(--border-radius);
+}
+
+.character-detail__ul {
+	padding-left: 0;
+	list-style: none;
+}

@@ -1,0 +1,23 @@
+.decorative-title {
+	display: inline-block;
+	position: relative;
+}
+
+.decorative-title__squiggly-underline {
+	display: flex;
+	justify-content: center;
+	position: absolute;
+	left: 0rem;
+	right: 0rem;
+	top: 0.7rem;
+	color: var(--color-3);
+	font-family: "Noto Sans Mono", monospace;
+	font-size: 2rem;
+	font-weight: 900;
+	overflow: hidden;
+	z-index: -1;
+}
+
+.decorative-title__squiggly-underline-inner {
+	letter-spacing: -0.6rem;
+}
