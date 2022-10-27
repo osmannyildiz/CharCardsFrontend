@@ -22,7 +22,7 @@ html {
 
 body {
 	height: 100%;
-	margin: 0.5rem;
+	margin: 0;
 	background-color: var(--color-2);
 	font-family: "Lato", sans-serif;
 }
@@ -44,6 +44,7 @@ a:hover {
 	border-radius: var(--border-radius);
 	text-decoration: none;
 	cursor: pointer;
+	font-family: inherit;
 }
 .btn--purple {
 	background-color: var(--color-1);
@@ -83,6 +84,7 @@ a:hover {
 	width: 100%;
 	max-width: var(--max-width);
 	margin: 0 auto;
+	padding: 0 0.5rem;
 	/* position: relative; */
 }
 
@@ -92,4 +94,30 @@ a:hover {
 
 .text-center {
 	text-align: center;
+}
+
+/* ===== ADVANCED ===== */
+
+.skeleton {
+	--skeleton-opacity1: 0.3;
+	--skeleton-opacity2: 0.4;
+	animation: skeleton-glow 2s infinite;
+}
+
+@keyframes skeleton-glow {
+	0% {
+		background-color: rgba(255, 255, 255, var(--skeleton-opacity1));
+	}
+	10% {
+		background-color: rgba(255, 255, 255, var(--skeleton-opacity2));
+	}
+	50% {
+		background-color: rgba(255, 255, 255, var(--skeleton-opacity2));
+	}
+	60% {
+		background-color: rgba(255, 255, 255, var(--skeleton-opacity1));
+	}
+	100% {
+		background-color: rgba(255, 255, 255, var(--skeleton-opacity1));
+	}
 }

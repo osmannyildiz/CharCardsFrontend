@@ -28,7 +28,7 @@ export default function CharacterCard({ character, className }: Props) {
 			onClick={flipCard}
 		>
 			<div className="character-card__inner">
-				<div className="character-card__front">
+				<div className="character-card__front skeleton">
 					<img
 						className="character-card__img"
 						src={character.image}
