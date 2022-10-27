@@ -10,6 +10,8 @@ interface Props {
 }
 
 export default function CharacterCard({ character, className }: Props) {
+	// https://www.w3schools.com/howto/howto_css_flip_card.asp
+
 	const [isFlipped, setIsFlipped] = useState(false);
 
 	const flipCard = () => {
@@ -17,25 +19,31 @@ export default function CharacterCard({ character, className }: Props) {
 	};
 
 	return (
-		<div className={cn("character-card", className)} onClick={flipCard}>
-			<div
-				className={cn("character-card__front", isFlipped && "d-none")}
-				style={{ display: isFlipped ? "none" : "block" }}
-			>
-				<img
-					className="character-card__img"
-					src={character.image}
-					alt={character.name}
-				/>
-			</div>
-			<div className={cn("character-card__back", !isFlipped && "d-none")}>
-				<h2 className="character-card__name">{character.name}</h2>
-				<Link
-					className="character-card__details-btn btn btn--purple"
-					to={`/characters/${character.id}`}
-				>
-					See Details
-				</Link>
+		<div
+			className={cn(
+				"character-card",
+				isFlipped && "character-card--flipped",
+				className
+			)}
+			onClick={flipCard}
+		>
+			<div className="character-card__inner">
+				<div className="character-card__front">
+					<img
+						className="character-card__img"
+						src={character.image}
+						alt={character.name}
+					/>
+				</div>
+				<div className="character-card__back">
+					<h2 className="character-card__name">{character.name}</h2>
+					<Link
+						className="character-card__details-btn btn btn--purple"
+						to={`/characters/${character.id}`}
+					>
+						See Details
+					</Link>
+				</div>
 			</div>
 		</div>
 	);
