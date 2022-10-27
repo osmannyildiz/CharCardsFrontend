@@ -10,6 +10,7 @@ export interface ApiSliceState {
 			isFetching: boolean;
 			fetchError: string | null;
 			lastFetchedPage: number;
+			exhausted: boolean;
 		};
 		individual: {
 			data: {
@@ -29,6 +30,7 @@ const initialState: ApiSliceState = {
 			isFetching: false,
 			fetchError: null,
 			lastFetchedPage: 0,
+			exhausted: false,
 		},
 		individual: {
 			data: {},
@@ -54,6 +56,13 @@ export const apiSlice = createSlice({
 				state.characters.paginated.data =
 					state.characters.paginated.data.concat(action.payload);
 				state.characters.paginated.lastFetchedPage++;
+
+				if (
+					state.characters.paginated.lastFetchedPage ===
+					CharacterService.lastPage
+				) {
+					state.characters.paginated.exhausted = true;
+				}
 			})
 			.addCase(fetchCharactersNextPage.rejected, (state, action) => {
 				state.characters.paginated.isFetching = false;
@@ -109,7 +118,10 @@ export const fetchCharactersNextPage = createAsyncThunk<
 	{
 		condition: (_, { getState }) => {
 			const { apiSlice } = getState();
-			if (apiSlice.characters.paginated.isFetching) {
+			if (
+				apiSlice.characters.paginated.isFetching ||
+				apiSlice.characters.paginated.exhausted
+			) {
 				return false;
 			}
 		},

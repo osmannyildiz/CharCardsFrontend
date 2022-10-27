@@ -20,6 +20,9 @@ export default function CharactersPage() {
 	const lastFetchedPage = useSelector(
 		(state: StoreState) => state.apiSlice.characters.paginated.lastFetchedPage
 	);
+	const exhausted = useSelector(
+		(state: StoreState) => state.apiSlice.characters.paginated.exhausted
+	);
 	const searchQuery = useSelector(
 		(state: StoreState) => state.uiSlice.charactersSearchQuery
 	);
@@ -60,16 +63,18 @@ export default function CharactersPage() {
 		>
 			<CharacterCardGrid characters={getGridCharacters()} />
 			<div className="text-center">
-				<button
-					className="characters-page__load-more-btn btn btn--green"
-					type="button"
-					onClick={loadMore}
-				>
-					{isFetchingCharacters && (
-						<MyIcon className="btn-icon" path={mdiLoading} spin={true} />
-					)}
-					<span>Load more</span>
-				</button>
+				{!exhausted && (
+					<button
+						className="characters-page__load-more-btn btn btn--green"
+						type="button"
+						onClick={loadMore}
+					>
+						{isFetchingCharacters && (
+							<MyIcon className="btn-icon" path={mdiLoading} spin={true} />
+						)}
+						<span>Load more</span>
+					</button>
+				)}
 			</div>
 		</MainLayout>
 	);
