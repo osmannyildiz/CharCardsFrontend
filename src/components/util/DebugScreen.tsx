@@ -14,6 +14,9 @@ export default function DebugScreen() {
 	const individual_isFetching = useSelector(
 		(state: StoreState) => state.apiSlice.characters.individual.isFetching
 	);
+	const searchQuery = useSelector(
+		(state: StoreState) => state.uiSlice.charactersSearchQuery
+	);
 
 	return (
 		<div className={cn("debug-screen", !isVisible && "debug-screen--hidden")}>
@@ -33,6 +36,7 @@ export default function DebugScreen() {
 					<div>
 						<Link to="/characters/42">see 42</Link>
 					</div>
+					<div>searchQuery: {searchQuery}</div>
 				</section>
 			</div>
 
