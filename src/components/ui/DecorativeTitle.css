@@ -1,6 +1,7 @@
 .decorative-title {
 	display: inline-block;
 	position: relative;
+	font-weight: 900;
 }
 
 .decorative-title__squiggly-underline {
