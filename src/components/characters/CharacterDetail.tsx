@@ -29,11 +29,13 @@ export default function CharacterDetail({ character }: Props) {
 
 	return (
 		<div className="character-detail">
-			<img
-				className="character-detail__img"
-				src={character.image}
-				alt="Character image"
-			/>
+			<div className="character-detail__img-wrapper skeleton">
+				<img
+					className="character-detail__img"
+					src={character.image}
+					alt="Character image"
+				/>
+			</div>
 			<DecorativeTitle className="character-detail__name">
 				{character.name}
 			</DecorativeTitle>

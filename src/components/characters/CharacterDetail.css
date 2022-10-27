@@ -3,12 +3,19 @@
 	text-align: center;
 }
 
-.character-detail__img {
+.character-detail__img-wrapper {
 	width: 100%;
 	max-width: 300px;
-	display: block;
+	aspect-ratio: 1/1;
+	object-fit: cover;
 	margin: 0 auto;
 	border-radius: var(--border-radius);
+	overflow: clip;
+}
+
+.character-detail__img {
+	display: block;
+	width: 100%;
 }
 
 .character-detail__list {

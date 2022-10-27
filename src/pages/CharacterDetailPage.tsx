@@ -3,7 +3,8 @@ import MainLayout from "@/components/layout/MainLayout";
 import MyIcon from "@/components/ui/MyIcon";
 import { fetchCharacterById } from "@/data/apiSlice";
 import { StoreDispatch, StoreState } from "@/data/store";
-import { mdiArrowLeft } from "@mdi/js";
+import { mdiArrowLeft, mdiLoading } from "@mdi/js";
+import Icon from "@mdi/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
@@ -45,7 +46,14 @@ export default function CharacterDetailPage() {
 			{character ? (
 				<CharacterDetail character={character} />
 			) : (
-				<p>no character :(</p>
+				<div className="text-center">
+					<Icon
+						className="character-detail-page__spinner"
+						size="300px"
+						path={mdiLoading}
+						spin={true}
+					/>
+				</div>
 			)}
 		</MainLayout>
 	);
