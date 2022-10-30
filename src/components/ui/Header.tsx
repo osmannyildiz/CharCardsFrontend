@@ -11,7 +11,7 @@ export default function Header({ children }: Props) {
 			<div className="container">
 				<img
 					className="header__logo"
-					src={`${import.meta.env.BASE_URL}logo.png`}
+					src={`${process.env.BASE_URL}logo.png`}
 					alt="CharCards"
 				/>
 				{children}

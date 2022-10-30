@@ -8,7 +8,7 @@ import "./App.css";
 export default function App() {
 	return (
 		<Provider store={store}>
-			<BrowserRouter basename={import.meta.env.BASE_URL}>
+			<BrowserRouter basename={process.env.BASE_URL}>
 				<div className="app">
 					<div className="app__background"></div>
 					<Routes>
