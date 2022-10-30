@@ -144,12 +144,10 @@ export const fetchCharacterById = createAsyncThunk<
 			(character) => character.id === characterId
 		);
 		if (characterFromPaginated) {
-			console.info("hey found it");
 			return characterFromPaginated;
 		}
 
 		const fetchedCharacter = await CharacterService.getById(characterId);
-		console.info("hey fetched it");
 		return fetchedCharacter;
 	},
 	{
@@ -159,7 +157,6 @@ export const fetchCharacterById = createAsyncThunk<
 				apiSlice.characters.individual.data[characterId] ||
 				apiSlice.characters.individual._beingFetchedIds.includes(characterId)
 			) {
-				console.info("hey already have it");
 				return false;
 			}
 		},

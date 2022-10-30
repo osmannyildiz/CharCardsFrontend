@@ -9,7 +9,11 @@ export default function Header({ children }: Props) {
 	return (
 		<header className="header">
 			<div className="container">
-				<img className="header__logo" src="/logo.png" alt="CharCards" />
+				<img
+					className="header__logo"
+					src={`${import.meta.env.BASE_URL}logo.png`}
+					alt="CharCards"
+				/>
 				{children}
 			</div>
 		</header>

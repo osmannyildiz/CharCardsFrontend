@@ -4,7 +4,7 @@ import MyIcon from "@/components/ui/MyIcon";
 import { fetchCharacterById } from "@/data/apiSlice";
 import { StoreDispatch, StoreState } from "@/data/store";
 import { mdiArrowLeft, mdiLoading } from "@mdi/js";
-import Icon from "@mdi/react";
+import { Icon } from "@mdi/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";

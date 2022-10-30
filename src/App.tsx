@@ -1,4 +1,3 @@
-import DebugScreen from "@/components/util/DebugScreen";
 import { store } from "@/data/store";
 import CharacterDetailPage from "@/pages/CharacterDetailPage";
 import CharactersPage from "@/pages/CharactersPage";
@@ -9,7 +8,7 @@ import "./App.css";
 export default function App() {
 	return (
 		<Provider store={store}>
-			<BrowserRouter>
+			<BrowserRouter basename={import.meta.env.BASE_URL}>
 				<div className="app">
 					<div className="app__background"></div>
 					<Routes>
@@ -19,7 +18,7 @@ export default function App() {
 							element={<CharacterDetailPage />}
 						/>
 					</Routes>
-					<DebugScreen />
+					{/* <DebugScreen /> */}
 				</div>
 			</BrowserRouter>
 		</Provider>

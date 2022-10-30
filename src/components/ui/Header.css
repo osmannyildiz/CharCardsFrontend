@@ -7,4 +7,9 @@
 	display: block;
 	max-width: 100%;
 	margin: 0 auto;
+	/* For alt text if the image can't load */
+	color: white;
+	font-size: 3rem;
+	font-weight: 900;
+	text-align: center;
 }
