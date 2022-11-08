@@ -1,8 +1,10 @@
 import CharacterDetail from "@/components/characters/CharacterDetail";
 import MainLayout from "@/components/layout/MainLayout";
+import DecorativeTitle from "@/components/ui/DecorativeTitle";
 import MyIcon from "@/components/ui/MyIcon";
 import { fetchCharacterById } from "@/data/apiSlice";
-import { StoreDispatch, StoreState } from "@/data/store";
+import type { StoreDispatch, StoreState } from "@/data/store";
+import type { Children } from "@/utils/types";
 import { mdiArrowLeft, mdiLoading } from "@mdi/js";
 import { Icon } from "@mdi/react";
 import { useEffect } from "react";
@@ -12,13 +14,19 @@ import "./CharacterDetailPage.css";
 
 export default function CharacterDetailPage() {
 	const { characterId } = useParams();
-	let character;
+	let character, isFetching, fetchError;
 	const dispatch = useDispatch<StoreDispatch>();
 
 	if (characterId) {
 		character = useSelector(
 			(state: StoreState) =>
 				state.apiSlice.characters.individual.data[parseInt(characterId)]
+		);
+		isFetching = useSelector(
+			(state: StoreState) => state.apiSlice.characters.individual.isFetching
+		);
+		fetchError = useSelector(
+			(state: StoreState) => state.apiSlice.characters.individual.fetchError
 		);
 	}
 
@@ -27,6 +35,29 @@ export default function CharacterDetailPage() {
 			dispatch(fetchCharacterById(parseInt(characterId)));
 		}
 	}, [characterId]);
+
+	let view: Children;
+	if (character) {
+		view = <CharacterDetail character={character} />;
+	} else if (isFetching) {
+		view = (
+			<div className="text-center">
+				<Icon
+					className="character-detail-page__spinner"
+					size="300px"
+					path={mdiLoading}
+					spin={true}
+				/>
+			</div>
+		);
+	} else {
+		view = (
+			<div className="text-center">
+				<DecorativeTitle>Ooops!</DecorativeTitle>
+				<p>{fetchError || "An unknown error occurred. That's weird."}</p>
+			</div>
+		);
+	}
 
 	return (
 		<MainLayout
@@ -43,18 +74,7 @@ export default function CharacterDetailPage() {
 				</div>
 			}
 		>
-			{character ? (
-				<CharacterDetail character={character} />
-			) : (
-				<div className="text-center">
-					<Icon
-						className="character-detail-page__spinner"
-						size="300px"
-						path={mdiLoading}
-						spin={true}
-					/>
-				</div>
-			)}
+			{view}
 		</MainLayout>
 	);
 }

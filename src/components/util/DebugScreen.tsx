@@ -37,6 +37,9 @@ export default function DebugScreen() {
 						<Link to="/characters/42">see 42</Link>
 					</div>
 					<div>
+						<Link to="/characters/1234">see 1234</Link>
+					</div>
+					<div>
 						<Link to="/blah">404</Link>
 					</div>
 					<div>searchQuery: {searchQuery}</div>

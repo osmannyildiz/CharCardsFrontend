@@ -1,6 +1,7 @@
 import type Character from "@/models/character";
 import CharacterService from "@/services/characterService";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { HttpClientStatusError } from "@/utils/httpClient";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { StoreState } from "./store";
 
 export interface ApiSliceState {
@@ -44,7 +45,14 @@ const initialState: ApiSliceState = {
 export const apiSlice = createSlice({
 	name: "api",
 	initialState,
-	reducers: {},
+	reducers: {
+		setCharactersIndividualFetchError: (
+			state,
+			action: PayloadAction<string | null>
+		) => {
+			state.characters.individual.fetchError = action.payload;
+		},
+	},
 	extraReducers(builder) {
 		builder
 			.addCase(fetchCharactersNextPage.pending, (state) => {
@@ -68,7 +76,7 @@ export const apiSlice = createSlice({
 				state.characters.paginated.isFetching = false;
 
 				state.characters.paginated.fetchError =
-					action.error.message || "An unknown error occurred.";
+					action.error.message || "An unknown error occurred. That's weird.";
 				throw action.error; // TODO
 			})
 			.addCase(fetchCharacterById.pending, (state, action) => {
@@ -82,7 +90,9 @@ export const apiSlice = createSlice({
 						(cid) => cid !== action.meta.arg
 					);
 
-				state.characters.individual.data[action.meta.arg] = action.payload;
+				if (action.payload) {
+					state.characters.individual.data[action.meta.arg] = action.payload;
+				}
 			})
 			.addCase(fetchCharacterById.rejected, (state, action) => {
 				state.characters.individual.isFetching = false;
@@ -92,7 +102,7 @@ export const apiSlice = createSlice({
 					);
 
 				state.characters.individual.fetchError =
-					action.error.message || "An unknown error occurred.";
+					action.error.message || "An unknown error occurred. That's weird.";
 				throw action.error; // TODO
 			});
 	},
@@ -129,12 +139,12 @@ export const fetchCharactersNextPage = createAsyncThunk<
 );
 
 export const fetchCharacterById = createAsyncThunk<
-	Character,
+	Character | null,
 	number,
 	{ state: StoreState }
 >(
 	"api/fetchCharacterById",
-	async (characterId, { getState }) => {
+	async (characterId, { getState, dispatch }) => {
 		// await new Promise((resolve, reject) => {
 		// 	setTimeout(resolve, 5000);
 		// });
@@ -147,8 +157,23 @@ export const fetchCharacterById = createAsyncThunk<
 			return characterFromPaginated;
 		}
 
-		const fetchedCharacter = await CharacterService.getById(characterId);
-		return fetchedCharacter;
+		try {
+			const fetchedCharacter = await CharacterService.getById(characterId);
+			return fetchedCharacter;
+		} catch (err) {
+			if (err instanceof HttpClientStatusError) {
+				switch (err.resp.status) {
+					case 404:
+						dispatch(
+							setCharactersIndividualFetchError(
+								"This character does not exist. Wait... how did you get here?"
+							)
+						);
+						return null;
+				}
+			}
+			throw err;
+		}
 	},
 	{
 		condition: (characterId, { getState }) => {
@@ -164,4 +189,4 @@ export const fetchCharacterById = createAsyncThunk<
 );
 
 export const apiSliceReducer = apiSlice.reducer;
-// export const { increment, decrement, incrementByAmount } = apiSlice.actions;
+export const { setCharactersIndividualFetchError } = apiSlice.actions;
