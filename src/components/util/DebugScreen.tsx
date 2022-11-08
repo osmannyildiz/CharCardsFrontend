@@ -36,6 +36,9 @@ export default function DebugScreen() {
 					<div>
 						<Link to="/characters/42">see 42</Link>
 					</div>
+					<div>
+						<Link to="/blah">404</Link>
+					</div>
 					<div>searchQuery: {searchQuery}</div>
 				</section>
 			</div>
