@@ -1,12 +1,13 @@
 export default class HttpClient {
+	static _erroneousHttpStatusCodes = [404];
+
 	static async _sendRequest(url: string, options: RequestInit = {}) {
-		try {
-			const resp = await fetch(url, options);
-			const respJson = await resp.json();
-			return respJson;
-		} catch (err) {
-			throw err;
+		const resp = await fetch(url, options);
+		if (this._erroneousHttpStatusCodes.includes(resp.status)) {
+			throw new HttpClientStatusError(resp);
 		}
+		const respJson = await resp.json();
+		return respJson;
 	}
 
 	static async get<T>(url: string): Promise<T> {
@@ -37,5 +38,16 @@ export default class HttpClient {
 		return await this._sendRequest(url, {
 			method: "DELETE",
 		});
+	}
+}
+
+export interface HttpClientError {}
+
+export class HttpClientStatusError extends Error implements HttpClientError {
+	resp: Response;
+
+	constructor(resp: Response) {
+		super(`The server responded with HTTP status ${resp.status}.`);
+		this.resp = resp;
 	}
 }

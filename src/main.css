@@ -23,6 +23,7 @@ html {
 body {
 	height: 100%;
 	margin: 0;
+	color: white;
 	background-color: var(--color-2);
 	font-family: "Lato", sans-serif;
 }
@@ -38,6 +39,7 @@ a:hover {
 /* ===== ELEMENTS ===== */
 
 .btn {
+	display: inline-block;
 	padding: 0.5rem 1rem;
 	color: white;
 	border: none;
@@ -94,6 +96,11 @@ a:hover {
 
 .text-center {
 	text-align: center;
+}
+
+.mx-auto {
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /* ===== ADVANCED ===== */
